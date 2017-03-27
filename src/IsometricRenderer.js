@@ -19,7 +19,7 @@ class IsometricRenderer {
       const blockId = this.blocks[index];
       const { x: realX, y: realY, z: realZ } = this.getRealCoordinatesByIndex(index);
       const { x: renderX, y: renderY } = calculateRenderCoordinates(realX, realY, realZ);
-      this.texturePack.getBlockById(blockId).render(this.canvas, renderX, renderY);
+      this.texturePack.getBlockById(blockId).render(this.canvas, this.texturePack, renderX, renderY);
     }
   }
   
