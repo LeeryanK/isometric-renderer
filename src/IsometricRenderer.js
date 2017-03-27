@@ -51,4 +51,4 @@ class IsometricRenderer {
   }
 }
 
-export default IsometricRender;
+export default IsometricRenderer;
