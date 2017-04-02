@@ -14,6 +14,11 @@ class IsometricRenderer {
     this.texturePack = texturePack;
   }
   
+  deleteBlockAt(x, y, z) {
+    const blockIndex = this.getIndexForBlockCoords(x, y, z);
+    this.blocks[blockIndex] = 0;
+  }
+  
   render() {
     for (let index of this.blockIndicesRenderingOrder) {
       const blockId = this.blocks[index];
@@ -42,6 +47,10 @@ class IsometricRenderer {
     return blockIndices;
   }
   
+  getIndexForBlockForBlockCoords(x, y, z) {
+    return (y * this.xSize * this.ySize) + (z * this.xSize) + x;
+  }
+  
   getRealCoordinatesInBlocksByIndex(index) {
     return {
       x: Math.floor(index / this.zSize) % this.xSize,
@@ -59,6 +68,11 @@ class IsometricRenderer {
       y: coordsInBlocks.y * blockSize,
       z: coordsInBlocks.z * blockSize
     };
+  }
+  
+  setBlockAt(blockId, x, y, z) {
+    const blockIndex = this.getIndexForBlockCoords(x, y, z);
+    this.blocks[blockIndex] = blockId;
   }
 }
 
