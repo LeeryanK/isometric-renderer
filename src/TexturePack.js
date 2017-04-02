@@ -16,7 +16,7 @@ class TexturePack {
   }
   
   initBlockDict() {
-    this.id_ = 0;
+    this.id_ = 1; // Start at 1 because 0 is reserved for nothingness.
     this.blockDict = {};
     
     for (let { name } of this.blocks) {
