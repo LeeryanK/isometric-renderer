@@ -17,7 +17,7 @@ class IsometricRenderer {
   render() {
     for (let index of this.blockIndicesRenderingOrder) {
       const blockId = this.blocks[index];
-      const { x: realX, y: realY, z: realZ } = this.getRealCoordinatesByIndex(index);
+      const { x: realX, y: realY, z: realZ } = this.getRealCoordinatesInPixelsByIndex(index);
       const { x: renderX, y: renderY } = calculateRenderCoordinates(realX, realY, realZ);
       this.texturePack.getBlockById(blockId).render(this.canvas, this.texturePack, renderX, renderY);
     }
@@ -25,7 +25,7 @@ class IsometricRenderer {
   
   getBlockIndicesOrder() {
     const blockIndices = [...Array(this.volume).keys()];
-    const blockCoordinates = blockIndices.map(this.getRealCoordinatesByIndex.bind(this));
+    const blockCoordinates = blockIndices.map(this.getRealCoordinatesInBlocksByIndex.bind(this));
     const lastBlockCoordinates = blockCoordinates[this.volume - 1];
     const { x: lbx, y: lby, z: lbz } = lastBlockCoordinates;
     const distancesFromLastBlock = blockCoordinates.map(({ x, y, z }) => {
@@ -42,11 +42,22 @@ class IsometricRenderer {
     return blockIndices;
   }
   
-  getRealCoordinatesByIndex(index) {
+  getRealCoordinatesInBlocksByIndex(index) {
     return {
       x: Math.floor(index / this.zSize) % this.xSize,
       y: Math.floor(index / this.ySize),
       z: index % this.zSize
+    };
+  }
+  
+  getRealCoordinatesInPixelsByIndex(index) {
+    const coordsInBlocks = this.getRealCoordinatesInBlocksByIndex(index);
+    const blockSize = this.texturePack.blockSize;
+    
+    return {
+      x: coordsInBlocks.x * blockSize,
+      y: coordsInBlocks.y * blockSize,
+      z: coordsInBlocks.z * blockSize
     };
   }
 }
