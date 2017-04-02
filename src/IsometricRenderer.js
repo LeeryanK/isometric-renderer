@@ -47,7 +47,7 @@ class IsometricRenderer {
     return blockIndices;
   }
   
-  getIndexForBlockForBlockCoords(x, y, z) {
+  getIndexForBlockCoords(x, y, z) {
     return (y * this.xSize * this.ySize) + (z * this.xSize) + x;
   }
   
