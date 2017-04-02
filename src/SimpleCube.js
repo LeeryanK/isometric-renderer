@@ -27,6 +27,20 @@ SimpleCube.createBlockType = function(name, {lineColor, fillColor}) {
     CTX.strokeStyle = lineColor;
     CTX.fillStyle = fillColor;
     
+    if (fillColor) {
+      CTX.beginPath();
+      CTX.moveTo(bx, by);
+      CTX.lineTo(ex, ey);
+      CTX.lineTo(fx, fy);
+      CTX.lineTo(gx, gy);
+      CTX.lineTo(dx, dy);
+      CTX.lineTO(cx, cy);
+      CTX.lineTo(bx, by);
+      
+      CTX.fill();
+      CTX.closePath();
+    }
+    
     if (lineColor) {
       CTX.beginPath();
       CTX.moveTo(bx, by);
@@ -44,20 +58,6 @@ SimpleCube.createBlockType = function(name, {lineColor, fillColor}) {
       CTX.lineTo(ex, ey);
       
       CTX.stroke();
-      CTX.closePath();
-    }
-    
-    if (fillColor) {
-      CTX.beginPath();
-      CTX.moveTo(bx, by);
-      CTX.lineTo(ex, ey);
-      CTX.lineTo(fx, fy);
-      CTX.lineTo(gx, gy);
-      CTX.lineTo(dx, dy);
-      CTX.lineTO(cx, cy);
-      CTX.lineTo(bx, by);
-      
-      CTX.fill();
       CTX.closePath();
     }
   });
